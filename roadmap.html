@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#182129" />
+
+  <!-- Primary SEO Metadata -->
+  <title>Degree Roadmaps (4 Years • 8 Semesters) | CODE MIRCHI</title>
+  <meta name="description" content="Curated 4-year and 8-semester engineering roadmaps for B.Tech CSE, AI & ML, IT, BCA, and ECE with interactive task checklists and milestone tracking." />
+  <meta name="keywords" content="CODE MIRCHI, engineering roadmaps, B.Tech CSE roadmap, 8 semesters roadmap, BCA roadmap, AI ML roadmap, college roadmap, DSA syllabus, placements roadmap" />
+  <meta name="author" content="CODE MIRCHI" />
+  <link rel="canonical" href="https://launchpadindia.dev/roadmap" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://launchpadindia.dev/roadmap" />
+  <meta property="og:site_name" content="CODE MIRCHI" />
+  <meta property="og:title" content="Degree Roadmaps (4 Years • 8 Semesters) | CODE MIRCHI" />
+  <meta property="og:description" content="Tailored 4-year curricula divided into 8 distinct semesters across 5 engineering disciplines." />
+  <meta property="og:image" content="/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #12181f;
+      --bg-card: #182129;
+      --ink: #182129;
+      --ink-soft: #8fa0ad;
+      --line: rgba(255, 255, 255, 0.12);
+      --line-light: rgba(255, 255, 255, 0.2);
+      --acid: #d7f36b;
+      --coral: #ff7254;
+      --blue: #3b82f6;
+      --sky: #a8dfe0;
+      --yellow: #f5d56a;
+      --white: #ffffff;
+      --font-main: "Space Grotesk", sans-serif;
+      --display: "DM Serif Display", serif;
+      --mono: "IBM Plex Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-main);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- TOPBAR --- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      background: rgba(18, 24, 31, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(255, 46, 46, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .brand:hover .brand-mark {
+      transform: scale(1.08) rotate(-4deg);
+      box-shadow: 0 8px 30px rgba(255, 46, 46, 0.7);
+    }
+
+    .brand-mark img,
+    .brand-mark svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-dot {
+      color: var(--coral);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      transition: color 150ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--acid);
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      transition: all 180ms ease;
+    }
+
+    .btn-back-home:hover {
+      border-color: var(--acid);
+      color: var(--acid);
+      transform: translateX(-3px);
+    }
+
+    /* --- HERO --- */
+    .page-hero {
+      padding: 64px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--acid);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .page-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    .page-hero p {
+      max-width: 780px;
+      color: var(--ink-soft);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* --- DEGREE SELECTOR STRIP --- */
+    .degree-selector-card {
+      margin-top: 36px;
+      padding: 24px;
+      border: 1.5px solid var(--line-light);
+      border-radius: 20px;
+      background: var(--bg-card);
+    }
+
+    .selector-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--acid);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .degree-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .degree-pill {
+      min-height: 42px;
+      padding: 0 18px;
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 180ms ease;
+    }
+
+    .degree-pill:hover {
+      border-color: var(--acid);
+      background: rgba(215, 243, 107, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .degree-pill.active {
+      border-color: var(--acid);
+      background: var(--acid);
+      color: var(--ink);
+    }
+
+    .degree-info-bar {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .degree-info-bar strong {
+      font-size: 16px;
+      color: var(--white);
+    }
+
+    .degree-info-bar span {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-left: 8px;
+    }
+
+    .duration-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--acid);
+      background: rgba(215, 243, 107, 0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(215, 243, 107, 0.3);
+    }
+
+    /* --- TIMELINE NAVIGATION --- */
+    .timeline-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 32px 0;
+    }
+
+    .year-block {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .year-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .year-header strong {
+      color: var(--acid);
+      font-weight: 600;
+    }
+
+    .year-header span {
+      color: var(--ink-soft);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .semester-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .semester-btn {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 160ms ease;
+      text-align: left;
+    }
+
+    .semester-btn:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .semester-btn.active {
+      border-color: var(--acid);
+      background: rgba(215, 243, 107, 0.12);
+    }
+
+    .semester-btn span {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .semester-btn.active span {
+      color: var(--acid);
+    }
+
+    .semester-btn small {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-soft);
+    }
+
+    .semester-btn.completed-sem {
+      border-color: rgba(168, 223, 224, 0.4);
+    }
+
+    .semester-btn.completed-sem small {
+      color: var(--sky);
+    }
+
+    /* --- ROADMAP LAYOUT GRID --- */
+    .roadmap-layout {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 80px;
+    }
+
+    /* --- PROGRESS CARD (STICKY) --- */
+    .progress-card {
+      position: sticky;
+      top: 96px;
+      padding: 24px;
+      border: 1.5px solid var(--line-light);
+      border-radius: 20px;
+      background: var(--bg-card);
+    }
+
+    .mono-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--coral);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .progress-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      background: conic-gradient(var(--acid) var(--progress, 0deg), rgba(255, 255, 255, 0.08) 0deg);
+      position: relative;
+    }
+
+    .progress-ring::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      background: var(--bg-card);
+    }
+
+    .progress-ring strong {
+      position: relative;
+      font-family: var(--mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .progress-card h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .progress-card p {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-soft);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .degree-progress-wrap {
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .progress-head {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .progress-head strong {
+      color: var(--acid);
+    }
+
+    .progress-bar-track {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--sky), var(--acid));
+      transition: width 300ms ease;
+    }
+
+    /* --- SEMESTER SHOWCASE --- */
+    .semester-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .semester-main-card {
+      padding: 32px;
+      border: 1.5px solid var(--line-light);
+      border-radius: 24px;
+      background: var(--bg-card);
+    }
+
+    .semester-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .semester-tag-badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--acid);
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    .semester-focus-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .focus-pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 4px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .semester-main-card h2 {
+      font-family: var(--display);
+      font-size: clamp(26px, 4vw, 36px);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    /* Milestone Banner */
+    .milestone-banner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border: 1px solid rgba(215, 243, 107, 0.3);
+      border-radius: 14px;
+      background: rgba(215, 243, 107, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .milestone-icon {
+      font-size: 28px;
+    }
+
+    .milestone-content strong {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--acid);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .milestone-content p {
+      font-size: 14px;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    /* Tracks Grid */
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .track-box {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .track-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .track-title.academic {
+      color: var(--sky);
+    }
+
+    .track-title.industry {
+      color: var(--yellow);
+    }
+
+    .track-box p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.5;
+    }
+
+    /* Checklist */
+    .checklist-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .checklist-summary {
+      color: var(--acid);
+    }
+
+    .tasks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .task-item:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .task-item input {
+      display: none;
+    }
+
+    .custom-check {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: all 150ms ease;
+    }
+
+    .task-item input:checked + .custom-check {
+      background: var(--acid);
+      border-color: var(--acid);
+    }
+
+    .task-item input:checked + .custom-check::after {
+      content: "✓";
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .task-text {
+      flex: 1;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+      transition: all 150ms ease;
+    }
+
+    .task-item input:checked ~ .task-text {
+      text-decoration: line-through;
+      color: var(--ink-soft);
+    }
+
+    .task-cat-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .task-cat-badge.Code { color: var(--sky); border-color: rgba(168, 223, 224, 0.4); }
+    .task-cat-badge.Theory { color: var(--yellow); border-color: rgba(245, 213, 106, 0.4); }
+    .task-cat-badge.Ship { color: var(--acid); border-color: rgba(215, 243, 107, 0.4); }
+    .task-cat-badge.Career { color: var(--coral); border-color: rgba(255, 114, 84, 0.4); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      padding: 14px 20px;
+      background: var(--ink);
+      color: var(--white);
+      border: 1px solid var(--acid);
+      border-radius: 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 200ms ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+      .timeline-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .roadmap-layout {
+        grid-template-columns: 1fr;
+      }
+      .progress-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .timeline-container {
+        grid-template-columns: 1fr;
+      }
+      .tracks-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <a class="brand" href="/">
+        <span class="brand-mark"><img src="/logo.svg" alt="CODE MIRCHI" width="48" height="48" /></span>
+        CODE
+        <span class="brand-dot">/ ROADMAPS</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="/find-a-hackathon">Hackathons</a>
+        <a href="/resource-shelf">Resources</a>
+        <a href="/" class="btn-back-home">← Back to CODE MIRCHI</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="eyebrow">
+        <span>⚡ 4 Years • 8 Semesters • 5 Degree Paths</span>
+      </div>
+      <h1>Complete Degree Roadmaps.</h1>
+      <p>
+        Select your degree below to view an actionable, semester-by-semester curriculum.
+        Every semester balances essential university academic theory with practical build tracks,
+        portfolio milestones, and interactive tasks stored in your database.
+      </p>
+
+      <!-- DEGREE SELECTOR -->
+      <div class="degree-selector-card">
+        <div class="selector-title">
+          <span>🎓 Step 1: Select Your Degree</span>
+        </div>
+        <div class="degree-pills" id="degreePills"></div>
+
+        <div class="degree-info-bar">
+          <div>
+            <strong id="activeDegreeTitle">Loading Degree...</strong>
+            <span id="activeDegreeDesc"></span>
+          </div>
+          <span class="duration-tag">4 Years • 8 Full Semesters</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE NAVIGATOR (8 SEMESTERS) -->
+    <div class="timeline-container" id="timelineNav"></div>
+
+    <!-- MAIN ROADMAP LAYOUT -->
+    <div class="roadmap-layout">
+      <!-- PROGRESS CARD -->
+      <aside class="progress-card">
+        <span class="mono-label">Semester Progress</span>
+        <div class="progress-ring" id="progressRing" style="--progress: 0deg;">
+          <strong id="progressPercent">0%</strong>
+        </div>
+        <h3 id="progressCardSemesterName">Semester 01</h3>
+        <p id="progressCardCount">0 of 5 actions completed</p>
+
+        <div class="degree-progress-wrap">
+          <div class="progress-head">
+            <span>Overall 4-Year Journey</span>
+            <strong id="degreeProgressPercentText">0%</strong>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="degreeProgressFill"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ACTIVE SEMESTER SHOWCASE -->
+      <main class="semester-showcase">
+        <div class="semester-main-card">
+          <div class="semester-badge-row">
+            <span class="semester-tag-badge" id="semesterBadge">SEM 01 • YEAR 1</span>
+            <div class="semester-focus-pills" id="semesterFocusPills"></div>
+          </div>
+
+          <h2 id="semesterTitle">Loading Semester...</h2>
+
+          <div class="milestone-banner">
+            <div class="milestone-icon">🎯</div>
+            <div class="milestone-content">
+              <strong>Key Semester Milestone</strong>
+              <p id="semesterMilestone">Loading milestone...</p>
+            </div>
+          </div>
+
+          <div class="tracks-grid">
+            <div class="track-box">
+              <div class="track-title academic">
+                <span>📚</span> Academic Core
+              </div>
+              <p id="semesterAcademic">Loading...</p>
+            </div>
+            <div class="track-box">
+              <div class="track-title industry">
+                <span>🛠️</span> Industry & Build Track
+              </div>
+              <p id="semesterIndustry">Loading...</p>
+            </div>
+          </div>
+
+          <div class="checklist-header">
+            <span>Actionable Checklist For This Semester</span>
+            <span class="checklist-summary" id="tasksCompletedSummary">0 / 5 Done</span>
+          </div>
+
+          <div class="tasks-list" id="semesterTasksList"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Embedded fallback offline data for zero-latency instant rendering -->
+  <script src="roadmaps_data.js"></script>
+
+  <script>
+    // State management
+    let degrees = typeof defaultDegrees !== "undefined" ? defaultDegrees : [];
+    let currentDegreeId = "btech_cse";
+    let currentSemesterNum = 1;
+    let currentDegreeRoadmap = typeof defaultRoadmaps !== "undefined" ? defaultRoadmaps["btech_cse"] : null;
+
+    const degreePills = document.getElementById("degreePills");
+    const timelineNav = document.getElementById("timelineNav");
+    const toast = document.getElementById("toast");
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    function renderDegreePills() {
+      if (!degrees || !degrees.length) return;
+      degreePills.innerHTML = degrees.map(deg => {
+        const isActive = deg.id === currentDegreeId;
+        return `
+          <button class="degree-pill ${isActive ? "active" : ""}" data-degree-id="${deg.id}">
+            <span>${deg.icon}</span>
+            <span>${deg.name}</span>
+          </button>
+        `;
+      }).join("");
+
+      const activeDeg = degrees.find(d => d.id === currentDegreeId) || degrees[0];
+      if (activeDeg) {
+        document.getElementById("activeDegreeTitle").textContent = `${activeDeg.name} — ${activeDeg.full_title}`;
+        document.getElementById("activeDegreeDesc").textContent = activeDeg.description;
+      }
+    }
+
+    function renderTimelineNav(semesters) {
+      if (!semesters || !semesters.length) return;
+      const years = [
+        { year: 1, label: "Year 1 • Foundations", sems: semesters.slice(0, 2) },
+        { year: 2, label: "Year 2 • Core & Build", sems: semesters.slice(2, 4) },
+        { year: 3, label: "Year 3 • Specialization", sems: semesters.slice(4, 6) },
+        { year: 4, label: "Year 4 • Placements & Launch", sems: semesters.slice(6, 8) }
+      ];
+
+      timelineNav.innerHTML = years.map(yr => `
+        <div class="year-block">
+          <div class="year-header">
+            <strong>YEAR 0${yr.year}</strong>
+            <span>${yr.year === 1 ? "Beginner" : yr.year === 2 ? "Intermediate" : yr.year === 3 ? "Pre-Final" : "Final"}</span>
+          </div>
+          <div class="semester-buttons">
+            ${yr.sems.map(sem => {
+              const isActive = sem.semester_number === currentSemesterNum;
+              const isDone = sem.progress_percent === 100;
+              return `
+                <button
+                  class="semester-btn ${isActive ? "active" : ""} ${isDone ? "completed-sem" : ""}"
+                  data-semester-num="${sem.semester_number}"
+                >
+                  <span>SEM 0${sem.semester_number}</span>
+                  <small>${sem.progress_percent || 0}% done</small>
+                </button>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderActiveSemester(sem) {
+      if (!sem) return;
+      document.getElementById("semesterBadge").textContent = `SEM 0${sem.semester_number} • YEAR ${sem.year}`;
+      document.getElementById("semesterTitle").textContent = sem.title;
+      document.getElementById("semesterMilestone").textContent = sem.milestone;
+      document.getElementById("semesterAcademic").textContent = sem.academic_core;
+      document.getElementById("semesterIndustry").textContent = sem.industry_prep;
+      document.getElementById("tasksCompletedSummary").textContent = `${sem.completed_count} / ${sem.tasks_count} Done`;
+
+      const focusPills = document.getElementById("semesterFocusPills");
+      focusPills.innerHTML = (sem.focus_areas || []).map(f => `<span class="focus-pill">${f}</span>`).join("");
+
+      const tasksList = document.getElementById("semesterTasksList");
+      tasksList.innerHTML = (sem.tasks || []).map(task => {
+        const checked = task.completed ? "checked" : "";
+        return `
+          <label class="task-item">
+            <input type="checkbox" data-task-id="${task.id}" ${checked} />
+            <span class="custom-check"></span>
+            <span class="task-text">${task.text}</span>
+            <span class="task-cat-badge ${task.category}">${task.category}</span>
+          </label>
+        `;
+      }).join("");
+    }
+
+    function renderProgressCard(sem, overallStats) {
+      if (!sem) return;
+      const semPercent = sem.progress_percent || 0;
+      const degreesAngle = `${semPercent * 3.6}deg`;
+
+      document.getElementById("progressPercent").textContent = `${semPercent}%`;
+      document.getElementById("progressRing").style.setProperty("--progress", degreesAngle);
+      document.getElementById("progressCardSemesterName").textContent = `Semester 0${sem.semester_number}`;
+      document.getElementById("progressCardCount").textContent = `${sem.completed_count} of ${sem.tasks_count} actions completed`;
+
+      if (overallStats) {
+        const overallPercent = overallStats.progress_percent || 0;
+        document.getElementById("degreeProgressPercentText").textContent = `${overallPercent}% (${overallStats.completed_tasks}/${overallStats.total_tasks})`;
+        document.getElementById("degreeProgressFill").style.width = `${overallPercent}%`;
+      }
+    }
+
+    async function selectDegree(degId) {
+      currentDegreeId = degId;
+      renderDegreePills();
+
+      // Check fallback data first for instant UI response
+      if (typeof defaultRoadmaps !== "undefined" && defaultRoadmaps[degId]) {
+        currentDegreeRoadmap = defaultRoadmaps[degId];
+        let sem = currentDegreeRoadmap.semesters.find(s => s.semester_number === currentSemesterNum) || currentDegreeRoadmap.semesters[0];
+        renderTimelineNav(currentDegreeRoadmap.semesters);
+        renderActiveSemester(sem);
+        renderProgressCard(sem, currentDegreeRoadmap.overall_stats);
+      }
+
+      // Persist to server
+      fetch("/api/preferences", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ selected_degree: degId })
+      }).catch(console.warn);
+
+      await fetchRoadmap(currentDegreeId, currentSemesterNum);
+      showToast(`Switched to ${degrees.find(d => d.id === degId)?.name || degId}`);
+    }
+
+    async function selectSemester(semNum) {
+      currentSemesterNum = semNum;
+
+      if (currentDegreeRoadmap && currentDegreeRoadmap.semesters) {
+        let sem = currentDegreeRoadmap.semesters.find(s => s.semester_number === semNum);
+        if (sem) {
+          renderTimelineNav(currentDegreeRoadmap.semesters);
+          renderActiveSemester(sem);
+          renderProgressCard(sem, currentDegreeRoadmap.overall_stats);
+        }
+      }
+
+      fetch("/api/preferences", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ selected_semester: semNum })
+      }).catch(console.warn);
+
+      await fetchRoadmap(currentDegreeId, currentSemesterNum);
+    }
+
+    async function fetchRoadmap(degreeId, semNum) {
+      try {
+        const res = await fetch(`/api/roadmap?degree=${degreeId}&semester=${semNum}`);
+        const data = await res.json();
+        if (data && data.semesters) {
+          currentDegreeRoadmap = data;
+          renderTimelineNav(data.semesters);
+          renderActiveSemester(data.active_semester);
+          renderProgressCard(data.active_semester, data.overall_stats);
+        }
+      } catch (err) {
+        console.warn("Using offline roadmap data", err);
+      }
+    }
+
+    async function toggleTask(taskId, isChecked) {
+      // Optimistic instant UI update
+      if (currentDegreeRoadmap && currentDegreeRoadmap.active_semester && currentDegreeRoadmap.active_semester.tasks) {
+        const t = currentDegreeRoadmap.active_semester.tasks.find(x => x.id === taskId);
+        if (t) {
+          t.completed = isChecked;
+          const completedCount = currentDegreeRoadmap.active_semester.tasks.filter(x => x.completed).length;
+          currentDegreeRoadmap.active_semester.completed_count = completedCount;
+          currentDegreeRoadmap.active_semester.progress_percent = Math.round((completedCount / currentDegreeRoadmap.active_semester.tasks.length) * 100);
+          renderProgressCard(currentDegreeRoadmap.active_semester, currentDegreeRoadmap.overall_stats);
+          renderTimelineNav(currentDegreeRoadmap.semesters);
+        }
+      }
+
+      try {
+        const res = await fetch("/api/roadmap/toggle", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            task_id: taskId,
+            completed: isChecked,
+            degree_id: currentDegreeId,
+            semester_number: currentSemesterNum
+          })
+        });
+        const data = await res.json();
+        if (data.roadmap) {
+          currentDegreeRoadmap = data.roadmap;
+          renderTimelineNav(data.roadmap.semesters);
+          renderActiveSemester(data.roadmap.active_semester);
+          renderProgressCard(data.roadmap.active_semester, data.roadmap.overall_stats);
+        }
+        if (isChecked) {
+          showToast("Milestone saved in database. Consistency is key!");
+        }
+      } catch (err) {
+        console.warn("Could not sync task with server", err);
+      }
+    }
+
+    // --- EVENT LISTENERS ---
+    degreePills.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-degree-id]");
+      if (!btn) return;
+      selectDegree(btn.dataset.degreeId);
+    });
+
+    timelineNav.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-semester-num]");
+      if (!btn) return;
+      selectSemester(parseInt(btn.dataset.semesterNum, 10));
+    });
+
+    document.addEventListener("change", (e) => {
+      const input = e.target.closest("[data-task-id]");
+      if (!input) return;
+      toggleTask(input.dataset.taskId, input.checked);
+    });
+
+    // --- INITIALIZATION ---
+    // 1. Render immediately from fallback data (instant zero-latency display)
+    if (degrees && degrees.length) {
+      renderDegreePills();
+    }
+    if (currentDegreeRoadmap && currentDegreeRoadmap.semesters) {
+      renderTimelineNav(currentDegreeRoadmap.semesters);
+      renderActiveSemester(currentDegreeRoadmap.active_semester || currentDegreeRoadmap.semesters[0]);
+      renderProgressCard(currentDegreeRoadmap.active_semester || currentDegreeRoadmap.semesters[0], currentDegreeRoadmap.overall_stats);
+    }
+
+    // 2. Fetch live data & user preferences from backend
+    async function init() {
+      try {
+        const prefRes = await fetch("/api/preferences");
+        const prefData = await prefRes.json();
+        if (prefData.selected_degree) currentDegreeId = prefData.selected_degree;
+        if (prefData.selected_semester) currentSemesterNum = parseInt(prefData.selected_semester, 10);
+
+        const degRes = await fetch("/api/degrees");
+        const degData = await degRes.json();
+        if (degData.degrees && degData.degrees.length) {
+          degrees = degData.degrees;
+        }
+
+        renderDegreePills();
+        await fetchRoadmap(currentDegreeId, currentSemesterNum);
+      } catch (err) {
+        console.warn("Running in offline mode", err);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
