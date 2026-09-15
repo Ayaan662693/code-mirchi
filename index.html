@@ -330,6 +330,405 @@
         inset 0 1px 0.5px rgba(255, 255, 255, 0.95);
     }
 
+    /* ==========================================================================
+       LOGIN & HUMAN TEXT VERIFICATION (CAPTCHA) STYLES
+       ========================================================================== */
+    .nav-auth-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-auth-btn {
+      min-height: 38px;
+      padding: 0 15px;
+      border: 1px solid rgba(24, 33, 41, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0.5px #ffffff;
+      transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+
+    .nav-auth-btn:hover {
+      background: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(24, 33, 41, 0.1), inset 0 1px 0.5px #ffffff;
+    }
+
+    .nav-user-badge {
+      min-height: 38px;
+      padding: 0 12px 0 10px;
+      border: 1.5px solid rgba(16, 185, 129, 0.4);
+      border-radius: 999px;
+      background: rgba(240, 253, 244, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #065f46;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.18), inset 0 1px 0.5px #ffffff;
+      transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+
+    .nav-user-badge:hover {
+      background: #dcfce7;
+      transform: translateY(-1px);
+      border-color: #10b981;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+    }
+
+    .user-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+      animation: pulseUserDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseUserDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.65; transform: scale(0.85); }
+    }
+
+    .user-pill-tag {
+      font-size: 9px;
+      text-transform: uppercase;
+      background: #10b981;
+      color: #ffffff;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    /* Modal Form Enhancements */
+    .demo-hint-card {
+      background: linear-gradient(135deg, rgba(254, 243, 199, 0.8), rgba(254, 249, 195, 0.5));
+      border: 1.5px dashed #f59e0b;
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+    }
+
+    .demo-hint-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .demo-hint-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .demo-hint-body {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .demo-pill-creds {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: #78350f;
+    }
+
+    .demo-pill-creds code {
+      background: rgba(245, 158, 11, 0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #92400e;
+    }
+
+    .btn-autofill {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      background: #f59e0b;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35);
+      transition: all 160ms ease;
+    }
+
+    .btn-autofill:hover {
+      background: #d97706;
+      transform: translateY(-1px);
+    }
+
+    /* Password Input Wrapper */
+    .input-wrapper-pw {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper-pw input {
+      width: 100%;
+      padding-right: 42px;
+    }
+
+    .btn-toggle-pw {
+      position: absolute;
+      right: 8px;
+      background: transparent;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 4px;
+      color: var(--ink-soft);
+      transition: opacity 150ms ease;
+    }
+
+    .btn-toggle-pw:hover {
+      opacity: 0.7;
+    }
+
+    /* Captcha Human Verification Challenge Block */
+    .captcha-container {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
+      margin: 18px 0;
+    }
+
+    .captcha-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .captcha-header label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .captcha-badge {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: #e2e8f0;
+      color: #475569;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .captcha-visual-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .captcha-canvas-wrap {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid #94a3b8;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+      background: #ffffff;
+      flex-shrink: 0;
+      width: 200px;
+      height: 52px;
+    }
+
+    .captcha-canvas-wrap canvas {
+      display: block;
+      width: 200px;
+      height: 52px;
+    }
+
+    .captcha-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .captcha-btn {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 5px 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      color: #334155;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 140ms ease;
+    }
+
+    .captcha-btn:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .captcha-input-wrap {
+      position: relative;
+    }
+
+    .captcha-input-wrap input {
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      background: #ffffff;
+      border: 2px solid #94a3b8;
+    }
+
+    .captcha-input-wrap input:focus {
+      border-color: var(--ink);
+      box-shadow: 0 0 0 3px rgba(24, 33, 41, 0.12);
+    }
+
+    .captcha-subtext {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    .auth-alert {
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.4;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .auth-alert.error {
+      display: block;
+      background: #fef2f2;
+      border: 1.5px solid #f87171;
+      color: #991b1b;
+    }
+
+    .auth-alert.success {
+      display: block;
+      background: #f0fdf4;
+      border: 1.5px solid #4ade80;
+      color: #166534;
+    }
+
+    /* Profile Modal Details */
+    .profile-admin-card {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .profile-admin-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .profile-avatar-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+    }
+
+    .profile-meta h4 {
+      margin: 0 0 2px;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .profile-meta p {
+      margin: 0;
+      font-size: 12px;
+      font-family: var(--mono);
+      color: #64748b;
+    }
+
+    .profile-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .profile-spec-item {
+      font-size: 11px;
+    }
+
+    .profile-spec-item span {
+      display: block;
+      color: #64748b;
+      font-size: 10px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .profile-spec-item strong {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
     .mobile-menu {
       display: none;
     }
@@ -1840,7 +2239,8 @@
       transition: opacity 200ms ease;
     }
 
-    .modal-backdrop.open {
+    .modal-backdrop.open,
+    .modal-backdrop.active {
       opacity: 1;
       pointer-events: auto;
     }
@@ -1858,7 +2258,8 @@
       transition: transform 200ms ease;
     }
 
-    .modal-backdrop.open .modal-card {
+    .modal-backdrop.open .modal-card,
+    .modal-backdrop.active .modal-card {
       transform: translateY(0);
     }
 
@@ -5425,11 +5826,16 @@
             <a href="/resume-builder" data-nav="/resume-builder">Resume & Portfolio <span class="badge-new">NEW</span></a>
             <a href="/find-a-hackathon" data-nav="/find-a-hackathon">Find a hackathon</a>
             <a href="/team-finder" data-nav="/team-finder">Squad Up</a>
-            <a href="/freshers-guide" data-nav="/freshers-guide">Freshers guide</a>
             <a href="/resource-shelf" data-nav="/resource-shelf">Resource shelf</a>
           </nav>
 
-          <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="nav-auth-container" id="navAuthContainer">
+              <button class="nav-auth-btn" id="navLoginBtn" type="button" aria-label="Sign In to CODE MIRCHI">
+                <span>🔑</span>
+                <span>Sign In</span>
+              </button>
+            </div>
             <button class="nav-cta-btn" id="openModalBtnTop">+ Post Event</button>
             <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation" aria-expanded="false">
               +
@@ -5723,61 +6129,10 @@
         </div>
       </section>
 
-<section class="guidance-section" id="guidance">
+      <section class="resource-section" id="resources">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">03 / Freshers guide</p>
-            <h2>Your first 30 days, without the fog.</h2>
-          </div>
-          <p>
-            A simple rhythm for getting from “I want to learn coding” to
-            “I have something I can show someone.”
-          </p>
-        </div>
-
-        <div class="week-grid">
-          <article class="week-card">
-            <span class="mono-label">week 01</span>
-            <h3>Get set up.</h3>
-            <p>
-              Install your editor, Git, one programming language, and learn
-              how files, folders, terminals, and browsers fit together.
-            </p>
-          </article>
-
-          <article class="week-card">
-            <span class="mono-label">week 02</span>
-            <h3>Learn the shape.</h3>
-            <p>
-              Practice variables, conditions, loops, functions, arrays,
-              objects, and basic debugging through small exercises.
-            </p>
-          </article>
-
-          <article class="week-card">
-            <span class="mono-label">week 03</span>
-            <h3>Build tiny.</h3>
-            <p>
-              Make one small project: a tracker, calculator, quiz, landing
-              page, or API-powered utility. Keep the scope intentionally small.
-            </p>
-          </article>
-
-          <article class="week-card">
-            <span class="mono-label">week 04</span>
-            <h3>Show your work.</h3>
-            <p>
-              Push it to GitHub, deploy it, write a short README, and ask
-              one person for feedback before starting the next project.
-            </p>
-          </article>
-        </div>
-      </section>
-
-<section class="resource-section" id="resources">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">04 / Resource shelf</p>
+            <p class="eyebrow">03 / Resource shelf</p>
             <h2>Fewer tabs. Better sources.</h2>
           </div>
           <p>
@@ -5823,7 +6178,6 @@
             <a href="/project-vault" data-nav="/project-vault">Project Idea Vault & Blueprints</a>
             <a href="/find-a-hackathon" data-nav="/find-a-hackathon">Hackathons</a>
             <a href="/team-finder" data-nav="/team-finder">Squad Up (Team Finder)</a>
-            <a href="/freshers-guide" data-nav="/freshers-guide">Freshers guide</a>
             <a href="/resource-shelf" data-nav="/resource-shelf">Resources</a>
           </div>
         </footer>
@@ -6261,6 +6615,142 @@
           🏛️ Publish Architecture Blueprint
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- Demo Login & Human Text Verification Modal -->
+  <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+    <div class="modal-card" style="max-width: 490px;">
+      <div class="modal-header">
+        <div>
+          <span class="eyebrow" style="margin-bottom: 4px; display:block; color: #ff3b30;">Demo Portal</span>
+          <h3 id="loginModalTitle" style="font-size: 24px;">Sign In to CODE MIRCHI</h3>
+        </div>
+        <button class="modal-close" id="closeLoginModalBtn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <!-- Demo Credentials Quick Access Banner -->
+      <div class="demo-hint-card">
+        <div class="demo-hint-head">
+          <span class="demo-hint-title">
+            <span>🔑</span> <strong>Demo Credentials Available</strong>
+          </span>
+          <span style="font-family: var(--mono); font-size: 10px; color: #b45309; text-transform: uppercase;">Instant Test</span>
+        </div>
+        <div class="demo-hint-body">
+          <div class="demo-pill-creds">
+            ID: <code>admin</code> &bull; Password: <code>1234</code>
+          </div>
+          <button type="button" class="btn-autofill" id="btnAutoFillDemo" title="Click to auto-fill demo username and password">
+            ⚡ Fill Demo Details
+          </button>
+        </div>
+      </div>
+
+      <div class="auth-alert" id="loginAlertBox" role="alert"></div>
+
+      <form id="loginForm" autocomplete="on">
+        <div class="form-group">
+          <label for="loginInputId">User ID / Username *</label>
+          <input type="text" id="loginInputId" name="username" required placeholder="e.g. admin" autocomplete="username" />
+        </div>
+
+        <div class="form-group">
+          <label for="loginInputPassword">Password *</label>
+          <div class="input-wrapper-pw">
+            <input type="password" id="loginInputPassword" name="password" required placeholder="••••" autocomplete="current-password" />
+            <button type="button" class="btn-toggle-pw" id="togglePasswordBtn" title="Show/Hide Password" aria-label="Toggle password visibility">👁️</button>
+          </div>
+        </div>
+
+        <!-- Human Text Verification Challenge (CAPTCHA) -->
+        <div class="captcha-container">
+          <div class="captcha-header">
+            <label for="loginInputCaptcha">
+              <span>🛡️</span> Human Text Verification *
+            </label>
+            <span class="captcha-badge">Bot Protection</span>
+          </div>
+
+          <p style="font-size: 11.5px; color: #64748b; margin: 0 0 10px; line-height: 1.4;">
+            Type the 6 security characters shown below. Click <strong>Listen</strong> for audio pronunciation.
+          </p>
+
+          <div class="captcha-visual-row">
+            <div class="captcha-canvas-wrap" title="Security verification text">
+              <canvas id="captchaCanvas" width="200" height="52" aria-label="CAPTCHA image displaying security characters"></canvas>
+            </div>
+            <div class="captcha-controls">
+              <button type="button" class="captcha-btn" id="btnRefreshCaptcha" title="Get a new verification challenge">
+                <span>🔄</span> Refresh Code
+              </button>
+              <button type="button" class="captcha-btn" id="btnListenCaptcha" title="Pronounce verification characters aloud">
+                <span>🔊</span> Listen Audio
+              </button>
+            </div>
+          </div>
+
+          <div class="captcha-input-wrap">
+            <input type="text" id="loginInputCaptcha" name="captchaCode" maxlength="6" required placeholder="TYPE CODE HERE" autocomplete="off" spellcheck="false" />
+          </div>
+          <div class="captcha-subtext">Characters are not case-sensitive. Excludes ambiguous 0/O, 1/I.</div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="loginSubmitBtn" style="background: var(--ink); color: #fff; margin-top: 6px;">
+          Verify & Sign In ➔
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Authenticated User Profile & Admin Session Modal -->
+  <div class="modal-backdrop" id="userProfileModal" role="dialog" aria-modal="true" aria-labelledby="userProfileModalTitle">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <div>
+          <span class="eyebrow" style="margin-bottom: 4px; display:block; color: #10b981;">Active Session</span>
+          <h3 id="userProfileModalTitle" style="font-size: 24px;">Admin Account</h3>
+        </div>
+        <button class="modal-close" id="closeProfileModalBtn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="profile-admin-card">
+        <div class="profile-admin-header">
+          <div class="profile-avatar-box">🛡️</div>
+          <div class="profile-meta">
+            <h4 id="profileDisplayName">Demo Administrator</h4>
+            <p id="profileUsername">@admin &bull; <span style="color: #10b981; font-weight: 700;">Active Session</span></p>
+          </div>
+        </div>
+
+        <div class="profile-specs-grid">
+          <div class="profile-spec-item">
+            <span>Human Verification</span>
+            <strong style="color: #059669;">Verified Human ✅</strong>
+          </div>
+          <div class="profile-spec-item">
+            <span>Role Level</span>
+            <strong>Super Admin</strong>
+          </div>
+          <div class="profile-spec-item">
+            <span>Platform Permissions</span>
+            <strong>Full System Access</strong>
+          </div>
+          <div class="profile-spec-item">
+            <span>Demo ID Mode</span>
+            <strong>admin / 1234</strong>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button type="button" class="btn-submit" id="btnAdminTriggerBackup" style="background: #0f172a; color: #fff;">
+          📦 Run System SQLite Backup
+        </button>
+        <button type="button" class="btn-submit" id="btnLogoutBtn" style="background: #ef4444; color: #fff;">
+          🚪 Sign Out
+        </button>
+      </div>
     </div>
   </div>
 
@@ -7103,8 +7593,8 @@
       </section>
     `;
 
-    const PART_GUIDANCE = "<section class=\"guidance-section\" id=\"guidance\">\n        <div class=\"section-heading\">\n          <div>\n            <p class=\"eyebrow\">04 / Freshers guide</p>\n            <h2>Your first 30 days, without the fog.</h2>\n          </div>\n          <p>\n            A simple rhythm for getting from \u201cI want to learn coding\u201d to\n            \u201cI have something I can show someone.\u201d\n          </p>\n        </div>\n\n        <div class=\"week-grid\">\n          <article class=\"week-card\">\n            <span class=\"mono-label\">week 01</span>\n            <h3>Get set up.</h3>\n            <p>\n              Install your editor, Git, one programming language, and learn\n              how files, folders, terminals, and browsers fit together.\n            </p>\n          </article>\n\n          <article class=\"week-card\">\n            <span class=\"mono-label\">week 02</span>\n            <h3>Learn the shape.</h3>\n            <p>\n              Practice variables, conditions, loops, functions, arrays,\n              objects, and basic debugging through small exercises.\n            </p>\n          </article>\n\n          <article class=\"week-card\">\n            <span class=\"mono-label\">week 03</span>\n            <h3>Build tiny.</h3>\n            <p>\n              Make one small project: a tracker, calculator, quiz, landing\n              page, or API-powered utility. Keep the scope intentionally small.\n            </p>\n          </article>\n\n          <article class=\"week-card\">\n            <span class=\"mono-label\">week 04</span>\n            <h3>Show your work.</h3>\n            <p>\n              Push it to GitHub, deploy it, write a short README, and ask\n              one person for feedback before starting the next project.\n            </p>\n          </article>\n        </div>\n      </section>";
-    const PART_RESOURCES = "<section class=\"resource-section\" id=\"resources\">\n        <div class=\"section-heading\">\n          <div>\n            <p class=\"eyebrow\">05 / Resource shelf</p>\n            <h2>Fewer tabs. Better sources.</h2>\n          </div>\n          <p>\n            Use one structured source to learn, one platform to practice,\n            and one project to turn knowledge into proof.\n          </p>\n        </div>\n\n        <div class=\"resource-tabs\" aria-label=\"Resource categories\">\n          <button class=\"resource-tab active\" data-resource-filter=\"all\">Everything</button>\n          <button class=\"resource-tab\" data-resource-filter=\"start\">Foundations</button>\n          <button class=\"resource-tab\" data-resource-filter=\"solve\">Problem solving</button>\n          <button class=\"resource-tab\" data-resource-filter=\"ship\">Build and ship</button>\n          <button class=\"resource-tab\" data-resource-filter=\"watch\">YouTube</button>\n        </div>\n\n        <div class=\"resource-grid\" id=\"resourceGrid\"></div>\n\n        <p class=\"resource-note\">\n          A useful rule: do not open five courses for the same topic.\n          Choose one primary source, finish a small section, then practice\n          by writing code without looking at the answer.\n        </p>\n      </section>";
+    const PART_GUIDANCE = "";
+    const PART_RESOURCES = "<section class=\"resource-section\" id=\"resources\">\n        <div class=\"section-heading\">\n          <div>\n            <p class=\"eyebrow\">04 / Resource shelf</p>\n            <h2>Fewer tabs. Better sources.</h2>\n          </div>\n          <p>\n            Use one structured source to learn, one platform to practice,\n            and one project to turn knowledge into proof.\n          </p>\n        </div>\n\n        <div class=\"resource-tabs\" aria-label=\"Resource categories\">\n          <button class=\"resource-tab active\" data-resource-filter=\"all\">Everything</button>\n          <button class=\"resource-tab\" data-resource-filter=\"start\">Foundations</button>\n          <button class=\"resource-tab\" data-resource-filter=\"solve\">Problem solving</button>\n          <button class=\"resource-tab\" data-resource-filter=\"ship\">Build and ship</button>\n          <button class=\"resource-tab\" data-resource-filter=\"watch\">YouTube</button>\n        </div>\n\n        <div class=\"resource-grid\" id=\"resourceGrid\"></div>\n\n        <p class=\"resource-note\">\n          A useful rule: do not open five courses for the same topic.\n          Choose one primary source, finish a small section, then practice\n          by writing code without looking at the answer.\n        </p>\n      </section>";
 
     function renderTopbar(activeRoute) {
       return `
@@ -7122,11 +7612,16 @@
             <a href="/resume-builder" data-nav="/resume-builder" class="${activeRoute === '/resume-builder' || activeRoute === '/ats-checker' || activeRoute === '/portfolio-builder' || activeRoute === '/portfolio' ? 'active' : ''}">Resume & Portfolio <span class="badge-new">NEW</span></a>
             <a href="/find-a-hackathon" data-nav="/find-a-hackathon" class="${activeRoute === '/find-a-hackathon' ? 'active' : ''}">Find a hackathon</a>
             <a href="/team-finder" data-nav="/team-finder" class="${activeRoute === '/team-finder' || activeRoute === '/squad-up' ? 'active' : ''}">Squad Up</a>
-            <a href="/freshers-guide" data-nav="/freshers-guide" class="${activeRoute === '/freshers-guide' ? 'active' : ''}">Freshers guide</a>
             <a href="/resource-shelf" data-nav="/resource-shelf" class="${activeRoute === '/resource-shelf' ? 'active' : ''}">Resource shelf</a>
           </nav>
 
-          <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="nav-auth-container" id="navAuthContainer">
+              <button class="nav-auth-btn" id="navLoginBtn" type="button" aria-label="Sign In to CODE MIRCHI">
+                <span>🔑</span>
+                <span>Sign In</span>
+              </button>
+            </div>
             <button class="nav-cta-btn" id="openModalBtnTop">+ Post Event</button>
             <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation" aria-expanded="false">
               +
@@ -7159,7 +7654,6 @@
             <a href="/portfolio-builder" data-nav="/portfolio-builder">1-Click Portfolio Builder</a>
             <a href="/find-a-hackathon" data-nav="/find-a-hackathon">Hackathons</a>
             <a href="/team-finder" data-nav="/team-finder">Squad Up (Team Finder)</a>
-            <a href="/freshers-guide" data-nav="/freshers-guide">Freshers guide</a>
             <a href="/resource-shelf" data-nav="/resource-shelf">Resources</a>
           </div>
         </footer>
@@ -7244,17 +7738,6 @@
           </div>
         `;
       }
-      if (route === "/freshers-guide") {
-        return `
-          <div class="site-shell">
-            ${renderTopbar('/freshers-guide')}
-            <main class="standalone-page-main">
-              ${PART_GUIDANCE}
-            </main>
-            ${renderFooter()}
-          </div>
-        `;
-      }
       if (route === "/resource-shelf") {
         return `
           <div class="site-shell">
@@ -7279,7 +7762,6 @@
             ${PART_HIRING_BOARD}
             ${PART_HACKATHONS}
             ${PART_SQUAD_FINDER}
-            ${PART_GUIDANCE}
             ${PART_RESOURCES}
           </main>
           ${renderFooter()}
@@ -7292,6 +7774,9 @@
       let clean = p.split("?")[0].split("#")[0];
       if (clean.length > 1 && clean.endsWith("/")) {
         clean = clean.slice(0, -1);
+      }
+      if (clean === "/freshers-guide" || clean === "/guide") {
+        return "/";
       }
       if (clean === "/roadmap" || clean === "/roadmap.html" || clean === "/roadmaps") {
         return "/degree-roadmaps";
@@ -7311,7 +7796,11 @@
       if (clean === "/squad-up" || clean === "/team-finder" || clean === "/teammates" || clean === "/squads") {
         return "/team-finder";
       }
-      const valid = ["/", "/degree-roadmaps", "/internships", "/project-vault", "/resume-builder", "/portfolio-builder", "/find-a-hackathon", "/team-finder", "/freshers-guide", "/resource-shelf"];
+      if (clean === "/login" || clean === "/signin") {
+        setTimeout(openLoginModal, 60);
+        return "/";
+      }
+      const valid = ["/", "/degree-roadmaps", "/internships", "/project-vault", "/resume-builder", "/portfolio-builder", "/find-a-hackathon", "/team-finder", "/resource-shelf"];
       return valid.includes(clean) ? clean : "/";
     }
 
@@ -7774,6 +8263,413 @@
         }
       } catch (err) {
         console.warn("Could not sync task with server", err);
+      }
+    }
+
+    // =========================================================================
+    // AUTHENTICATION & HUMAN TEXT VERIFICATION (CAPTCHA)
+    // =========================================================================
+    let currentAuthToken = localStorage.getItem("codemirchi_auth_token") || null;
+    let currentUser = null;
+    try {
+      currentUser = JSON.parse(localStorage.getItem("codemirchi_auth_user") || "null");
+    } catch (e) {
+      currentUser = null;
+    }
+    let currentCaptchaId = null;
+    let currentCaptchaCode = "";
+    let isSubmittingLogin = false;
+
+    // Draw anti-bot human verification CAPTCHA with noise, bezier lines, and rotated glyphs
+    function drawCaptcha(code) {
+      const canvas = document.getElementById("captchaCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const width = canvas.width;
+      const height = canvas.height;
+
+      // Clean background with subtle pastel gradient
+      const bgGrd = ctx.createLinearGradient(0, 0, width, height);
+      bgGrd.addColorStop(0, "#f8fafc");
+      bgGrd.addColorStop(0.5, "#f1f5f9");
+      bgGrd.addColorStop(1, "#e2e8f0");
+      ctx.fillStyle = bgGrd;
+      ctx.fillRect(0, 0, width, height);
+
+      // Noise dots
+      for (let i = 0; i < 40; i++) {
+        ctx.fillStyle = ["#94a3b8", "#cbd5e1", "#cbd5e1", "#64748b"][Math.floor(Math.random() * 4)];
+        ctx.beginPath();
+        ctx.arc(Math.random() * width, Math.random() * height, Math.random() * 2 + 0.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Security wavy lines
+      const lineColors = ["#6366f1", "#0ea5e9", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"];
+      for (let i = 0; i < 4; i++) {
+        ctx.strokeStyle = lineColors[i % lineColors.length];
+        ctx.lineWidth = 1.3;
+        ctx.beginPath();
+        ctx.moveTo(0, Math.random() * height);
+        ctx.bezierCurveTo(
+          width * 0.3, Math.random() * height,
+          width * 0.6, Math.random() * height,
+          width, Math.random() * height
+        );
+        ctx.stroke();
+      }
+
+      // Render characters
+      const charArray = (code || "MIRCHI").split("");
+      const charWidth = width / (charArray.length + 1);
+      const textColors = ["#0f172a", "#1e293b", "#0f766e", "#1d4ed8", "#6d28d9", "#b91c1c"];
+
+      charArray.forEach((char, index) => {
+        ctx.save();
+        const x = (index + 0.8) * charWidth;
+        const y = height / 2 + (Math.random() * 8 - 4);
+        ctx.translate(x, y);
+        // Random slight rotation between -18° and +18°
+        const angle = (Math.random() * 36 - 18) * (Math.PI / 180);
+        ctx.rotate(angle);
+
+        ctx.font = `bold ${Math.floor(Math.random() * 4) + 24}px "JetBrains Mono", "SF Mono", monospace`;
+        ctx.fillStyle = textColors[index % textColors.length];
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        // Slight shadow
+        ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
+        ctx.shadowBlur = 3;
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
+
+        ctx.fillText(char, 0, 0);
+        ctx.restore();
+      });
+    }
+
+    async function fetchNewCaptcha() {
+      const captchaInput = document.getElementById("loginInputCaptcha");
+      if (captchaInput) captchaInput.value = "";
+
+      try {
+        const res = await fetch("/api/auth/captcha");
+        if (!res.ok) throw new Error("Could not fetch verification challenge");
+        const data = await res.json();
+        currentCaptchaId = data.captchaId;
+        currentCaptchaCode = data.code;
+        drawCaptcha(currentCaptchaCode);
+      } catch (err) {
+        console.warn("Falling back to local client captcha generation:", err);
+        const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        let fallback = "";
+        for (let i = 0; i < 6; i++) {
+          fallback += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        currentCaptchaId = "local-" + Date.now();
+        currentCaptchaCode = fallback;
+        drawCaptcha(currentCaptchaCode);
+      }
+    }
+
+    function speakCaptcha() {
+      if (!currentCaptchaCode) {
+        showToast("Please refresh verification code first.");
+        return;
+      }
+
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        // Speak characters spaced out
+        const spaced = currentCaptchaCode.split("").join(". ");
+        const utterance = new SpeechSynthesisUtterance("Human verification characters are: " + spaced);
+        utterance.rate = 0.85;
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+        showToast("🔊 Pronouncing verification code aloud...");
+      } else {
+        showToast(`Verification code: ${currentCaptchaCode.split("").join(" ")}`);
+      }
+    }
+
+    function openLoginModal() {
+      const modal = document.getElementById("loginModal");
+      if (!modal) return;
+      modal.classList.add("open");
+      modal.classList.add("active");
+      const alertBox = document.getElementById("loginAlertBox");
+      if (alertBox) {
+        alertBox.className = "auth-alert";
+        alertBox.textContent = "";
+      }
+      fetchNewCaptcha();
+      const idInput = document.getElementById("loginInputId");
+      if (idInput && !idInput.value) {
+        idInput.focus();
+      }
+    }
+
+    function closeLoginModal() {
+      const modal = document.getElementById("loginModal");
+      if (modal) {
+        modal.classList.remove("open");
+        modal.classList.remove("active");
+      }
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function openProfileModal() {
+      const modal = document.getElementById("userProfileModal");
+      if (!modal) return;
+      const nameEl = document.getElementById("profileDisplayName");
+      const userEl = document.getElementById("profileUsername");
+      if (currentUser) {
+        if (nameEl) nameEl.textContent = currentUser.name || "Demo Administrator";
+        if (userEl) userEl.innerHTML = `@${currentUser.id || "admin"} &bull; <span style="color: #10b981; font-weight: 700;">Active Session</span>`;
+      }
+      modal.classList.add("open");
+      modal.classList.add("active");
+    }
+
+    function closeProfileModal() {
+      const modal = document.getElementById("userProfileModal");
+      if (modal) {
+        modal.classList.remove("open");
+        modal.classList.remove("active");
+      }
+    }
+
+    function autoFillDemoCreds() {
+      const idInput = document.getElementById("loginInputId");
+      const pwInput = document.getElementById("loginInputPassword");
+      const captchaInput = document.getElementById("loginInputCaptcha");
+
+      if (idInput) idInput.value = "admin";
+      if (pwInput) pwInput.value = "1234";
+      if (captchaInput && currentCaptchaCode) {
+        captchaInput.value = currentCaptchaCode;
+      }
+
+      const alertBox = document.getElementById("loginAlertBox");
+      if (alertBox) {
+        alertBox.className = "auth-alert success";
+        alertBox.textContent = "⚡ Demo credentials (admin / 1234) and verification code filled! Click 'Verify & Sign In'.";
+      }
+      const submitBtn = document.getElementById("loginSubmitBtn");
+      if (submitBtn) {
+        submitBtn.focus();
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const pwInput = document.getElementById("loginInputPassword");
+      const toggleBtn = document.getElementById("togglePasswordBtn");
+      if (!pwInput) return;
+      if (pwInput.type === "password") {
+        pwInput.type = "text";
+        if (toggleBtn) toggleBtn.textContent = "🔒";
+      } else {
+        pwInput.type = "password";
+        if (toggleBtn) toggleBtn.textContent = "👁️";
+      }
+    }
+
+    async function handleLoginSubmit(e) {
+      if (e) e.preventDefault();
+      if (isSubmittingLogin) return;
+
+      const idInput = document.getElementById("loginInputId");
+      const pwInput = document.getElementById("loginInputPassword");
+      const captchaInput = document.getElementById("loginInputCaptcha");
+      const alertBox = document.getElementById("loginAlertBox");
+      const submitBtn = document.getElementById("loginSubmitBtn");
+
+      const id = idInput ? idInput.value.trim() : "";
+      const password = pwInput ? pwInput.value.trim() : "";
+      const captchaCode = captchaInput ? captchaInput.value.replace(/[^A-Za-z0-9]/g, "").toUpperCase() : "";
+
+      if (!id) {
+        if (alertBox) {
+          alertBox.className = "auth-alert error";
+          alertBox.textContent = "Please enter your User ID.";
+        }
+        if (idInput) idInput.focus();
+        return;
+      }
+
+      if (!password) {
+        if (alertBox) {
+          alertBox.className = "auth-alert error";
+          alertBox.textContent = "Please enter your password.";
+        }
+        if (pwInput) pwInput.focus();
+        return;
+      }
+
+      if (!captchaCode || captchaCode.length !== 6) {
+        if (alertBox) {
+          alertBox.className = "auth-alert error";
+          alertBox.textContent = "Please enter the 6 human verification characters exactly.";
+        }
+        if (captchaInput) captchaInput.focus();
+        return;
+      }
+
+      if (!currentCaptchaId) {
+        await fetchNewCaptcha();
+      }
+
+      isSubmittingLogin = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Verifying Credentials & Human Challenge...";
+      }
+
+      try {
+        const res = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id,
+            password,
+            captchaId: currentCaptchaId,
+            captchaCode
+          })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          if (alertBox) {
+            alertBox.className = "auth-alert error";
+            alertBox.textContent = data.error || "Login verification failed. Please try again.";
+          }
+          // Refresh captcha on failure
+          await fetchNewCaptcha();
+          if (captchaInput) {
+            captchaInput.value = "";
+            captchaInput.focus();
+          }
+          return;
+        }
+
+        // Login success!
+        currentAuthToken = data.token;
+        currentUser = data.user;
+        localStorage.setItem("codemirchi_auth_token", currentAuthToken);
+        localStorage.setItem("codemirchi_auth_user", JSON.stringify(currentUser));
+
+        if (alertBox) {
+          alertBox.className = "auth-alert success";
+          alertBox.textContent = `✅ Verified! Welcome back, ${currentUser.name || "Administrator"}.`;
+        }
+
+        updateNavAuthState();
+
+        setTimeout(() => {
+          closeLoginModal();
+          showToast(`🛡️ Logged in as ${currentUser.name || "Administrator"} (admin)`);
+        }, 400);
+
+      } catch (err) {
+        console.error("Login error:", err);
+        if (alertBox) {
+          alertBox.className = "auth-alert error";
+          alertBox.textContent = "Network error connecting to auth server. Please retry.";
+        }
+      } finally {
+        isSubmittingLogin = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Verify & Sign In ➔";
+        }
+      }
+    }
+
+    async function logoutUser() {
+      try {
+        if (currentAuthToken) {
+          await fetch("/api/auth/logout", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${currentAuthToken}`
+            }
+          });
+        }
+      } catch (e) {
+        console.warn("Logout error:", e);
+      } finally {
+        currentAuthToken = null;
+        currentUser = null;
+        localStorage.removeItem("codemirchi_auth_token");
+        localStorage.removeItem("codemirchi_auth_user");
+        closeProfileModal();
+        updateNavAuthState();
+        showToast("👋 Signed out successfully.");
+      }
+    }
+
+    async function triggerAdminBackup() {
+      const btn = document.getElementById("btnAdminTriggerBackup");
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Running SQLite Backup...";
+      }
+      try {
+        const res = await fetch("/api/admin/backup", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${currentAuthToken || ""}`,
+            "Content-Type": "application/json"
+          }
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          const file = data.filename || data.backupFile || "backup.db";
+          const bytes = data.size_bytes || data.size || 0;
+          showToast(`📦 Backup created: ${file} (${(bytes / 1024).toFixed(1)} KB)`);
+        } else {
+          showToast(`⚠️ Backup failed: ${data.error || "Access denied"}`);
+        }
+      } catch (err) {
+        showToast("Backup request failed. Please check server.");
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "📦 Run System SQLite Backup";
+        }
+      }
+    }
+
+    function updateNavAuthState() {
+      const authContainers = document.querySelectorAll(".nav-auth-container, #navAuthContainer");
+
+      if (currentUser && currentAuthToken) {
+        authContainers.forEach(container => {
+          container.innerHTML = `
+            <button class="nav-user-badge" id="navUserBadgeBtn" type="button" title="Administrator Session Active" aria-label="View Administrator Profile">
+              <span class="user-status-dot"></span>
+              <span>🛡️</span>
+              <span>${escapeHTML(currentUser.id || "admin")}</span>
+              <span class="user-pill-tag">ADMIN</span>
+            </button>
+          `;
+        });
+      } else {
+        authContainers.forEach(container => {
+          container.innerHTML = `
+            <button class="nav-auth-btn" id="navLoginBtn" type="button" aria-label="Sign In to CODE MIRCHI">
+              <span>🔑</span>
+              <span>Sign In</span>
+            </button>
+          `;
+        });
       }
     }
 
@@ -10130,7 +11026,6 @@ Achievements: National Finalist, Smart India Hackathon 2024 • Top 1.5% in Leet
         "/find-a-hackathon": "Find Student Hackathons in India | CODE MIRCHI",
         "/team-finder": "Squad Up: Hackathon Teammate Finder | CODE MIRCHI",
         "/squad-up": "Squad Up: Hackathon Teammate Finder | CODE MIRCHI",
-        "/freshers-guide": "Freshers Guide: First 30 Days | CODE MIRCHI",
         "/resource-shelf": "Curated Engineering Resource Shelf | CODE MIRCHI"
       };
       document.title = titles[path] || titles["/"];
@@ -10188,10 +11083,86 @@ Achievements: National Finalist, Smart India Hackathon 2024 • Top 1.5% in Leet
       if (heroProg && currentDegreeRoadmap && currentDegreeRoadmap.overall_stats) {
         heroProg.textContent = `${currentDegreeRoadmap.overall_stats.progress_percent || 0}%`;
       }
+
+      // Update Navigation Bar Authentication State
+      updateNavAuthState();
     }
 
     // Delegated Event Handlers
     document.addEventListener("click", (e) => {
+      // Authentication and Human Verification Modal Interactions
+      const loginBtn = e.target.closest("#navLoginBtn, [data-action='open-login']");
+      if (loginBtn) {
+        e.preventDefault();
+        openLoginModal();
+        return;
+      }
+
+      const userBadgeBtn = e.target.closest("#navUserBadgeBtn, [data-action='open-profile']");
+      if (userBadgeBtn) {
+        e.preventDefault();
+        openProfileModal();
+        return;
+      }
+
+      const closeLoginBtn = e.target.closest("#closeLoginModalBtn");
+      if (closeLoginBtn) {
+        closeLoginModal();
+        return;
+      }
+
+      const closeProfileBtn = e.target.closest("#closeProfileModalBtn");
+      if (closeProfileBtn) {
+        closeProfileModal();
+        return;
+      }
+
+      const autofillBtn = e.target.closest("#btnAutoFillDemo");
+      if (autofillBtn) {
+        autoFillDemoCreds();
+        return;
+      }
+
+      const refreshCaptchaBtn = e.target.closest("#btnRefreshCaptcha");
+      if (refreshCaptchaBtn) {
+        fetchNewCaptcha();
+        return;
+      }
+
+      const listenCaptchaBtn = e.target.closest("#btnListenCaptcha");
+      if (listenCaptchaBtn) {
+        speakCaptcha();
+        return;
+      }
+
+      const togglePwBtn = e.target.closest("#togglePasswordBtn");
+      if (togglePwBtn) {
+        togglePasswordVisibility();
+        return;
+      }
+
+      const backupBtn = e.target.closest("#btnAdminTriggerBackup");
+      if (backupBtn) {
+        triggerAdminBackup();
+        return;
+      }
+
+      const logoutBtn = e.target.closest("#btnLogoutBtn");
+      if (logoutBtn) {
+        logoutUser();
+        return;
+      }
+
+      // Close modals when clicking on backdrop
+      if (e.target.id === "loginModal") {
+        closeLoginModal();
+        return;
+      }
+      if (e.target.id === "userProfileModal") {
+        closeProfileModal();
+        return;
+      }
+
       const navLink = e.target.closest("[data-nav]");
       if (navLink) {
         e.preventDefault();
@@ -10936,6 +11907,16 @@ Achievements: National Finalist, Smart India Hackathon 2024 • Top 1.5% in Leet
       });
     }
 
+    const loginFormEl = document.getElementById("loginForm");
+    if (loginFormEl) {
+      loginFormEl.addEventListener("submit", handleLoginSubmit);
+    }
+    document.addEventListener("submit", (e) => {
+      if (e.target && e.target.id === "loginForm") {
+        handleLoginSubmit(e);
+      }
+    });
+
     // Motion.dev App Component
     function App() {
       const [currentPath, setCurrentPath] = useState(normalizePath(window.location.pathname));
@@ -10993,6 +11974,28 @@ Achievements: National Finalist, Smart India Hackathon 2024 • Top 1.5% in Leet
     fetchSavedOpportunities();
     fetchProjects();
     fetchSavedProjects();
+
+    // Verify stored session and sync topbar authentication state
+    updateNavAuthState();
+    if (currentAuthToken) {
+      fetch("/api/auth/me", {
+        headers: { "Authorization": `Bearer ${currentAuthToken}` }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.authenticated && data.user) {
+          currentUser = data.user;
+          localStorage.setItem("codemirchi_auth_user", JSON.stringify(currentUser));
+        } else {
+          currentUser = null;
+          currentAuthToken = null;
+          localStorage.removeItem("codemirchi_auth_token");
+          localStorage.removeItem("codemirchi_auth_user");
+        }
+        updateNavAuthState();
+      })
+      .catch(() => {});
+    }
   </script>
 </body>
 </html>

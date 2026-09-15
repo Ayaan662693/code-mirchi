@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'node:path';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 import * as db from './server/db.js';
 import * as backup from './server/backup.js';
 
@@ -10,6 +11,64 @@ const PORT = 3000;
 const HOST = '0.0.0.0';
 
 const ADMIN_API_KEY = process.env.ADMIN_API_KEY || 'launchpad-admin-secret-key-2026';
+
+// --- Demo Credentials Configuration ---
+const DEMO_USER = {
+  id: 'admin',
+  password: '1234',
+  name: 'Demo Administrator',
+  role: 'admin',
+  avatar: '🛡️',
+  title: 'Platform Administrator'
+};
+
+// --- In-Memory Human Verification (CAPTCHA) Store ---
+interface CaptchaChallenge {
+  id: string;
+  code: string;
+  expiresAt: number;
+}
+const captchaStore = new Map<string, CaptchaChallenge>();
+
+// Clean up expired captchas every 2 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [k, v] of captchaStore.entries()) {
+    if (now > v.expiresAt) captchaStore.delete(k);
+  }
+}, 120000);
+
+function generateCaptchaCode(): string {
+  // Clear, unambiguous alphanumeric characters (no 0/O, no 1/I/L)
+  const pool = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+  let code = '';
+  for (let i = 0; i < 6; i++) {
+    code += pool[Math.floor(Math.random() * pool.length)];
+  }
+  return code;
+}
+
+// --- In-Memory Auth Sessions Store ---
+interface UserSession {
+  token: string;
+  id: string;
+  username: string;
+  name: string;
+  role: string;
+  avatar: string;
+  title: string;
+  loginTime: number;
+  expiresAt: number;
+}
+const sessionStore = new Map<string, UserSession>();
+
+// Clean up expired sessions every 10 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [k, v] of sessionStore.entries()) {
+    if (now > v.expiresAt) sessionStore.delete(k);
+  }
+}, 600000);
 
 // --- Basic Middlewares ---
 app.use(cors());
@@ -69,12 +128,188 @@ setInterval(() => {
 // --- Admin Auth Middleware ---
 function requireAdmin(req: Request, res: Response, next: NextFunction) {
   const providedKey = req.headers['x-admin-key'] || req.query.api_key;
-  if (!providedKey || String(providedKey) !== ADMIN_API_KEY) {
-    res.status(401).json({ error: 'Unauthorized. Provide a valid X-Admin-Key header.' });
+  if (providedKey && String(providedKey) === ADMIN_API_KEY) {
+    return next();
+  }
+
+  // Also check Bearer auth token or x-auth-token header
+  const authHeader = req.headers.authorization || (req.headers['x-auth-token'] as string);
+  const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7).trim() : authHeader?.trim();
+  if (token && sessionStore.has(token)) {
+    const session = sessionStore.get(token)!;
+    if (session.expiresAt > Date.now() && session.role === 'admin') {
+      return next();
+    }
+  }
+
+  res.status(401).json({ error: 'Unauthorized. Admin authorization required.' });
+}
+
+// --- Authentication & Human Verification Endpoints ---
+
+// 1. Get new Human Text Verification (CAPTCHA) challenge
+app.get('/api/auth/captcha', rateLimit(60, 60), (req: Request, res: Response) => {
+  const id = crypto.randomUUID();
+  const code = generateCaptchaCode();
+  const expiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+  captchaStore.set(id, { id, code, expiresAt });
+
+  res.json({
+    captchaId: id,
+    code: code, // returned for client-side animated canvas rendering & accessibility audio
+    expiresInSeconds: 600
+  });
+});
+
+// 2. Demo User Login with Human Text Verification
+app.post('/api/auth/login', rateLimit(30, 60), (req: Request, res: Response) => {
+  const { id, username, password, captchaId, captchaCode } = req.body || {};
+
+  const inputId = String(id || username || '').trim().toLowerCase();
+  const inputPassword = String(password || '').trim();
+  const inputCaptchaCode = String(captchaCode || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+
+  // Validate required fields
+  if (!inputId) {
+    res.status(400).json({ error: 'User ID is required.' });
     return;
   }
-  next();
-}
+  if (!inputPassword) {
+    res.status(400).json({ error: 'Password is required.' });
+    return;
+  }
+  if (!captchaId || !inputCaptchaCode) {
+    res.status(400).json({ error: 'Please enter the 6 human verification characters.', field: 'captcha' });
+    return;
+  }
+
+  // Verify CAPTCHA challenge
+  const isLocalFallback = typeof captchaId === 'string' && captchaId.startsWith('local-');
+  const challenge = captchaStore.get(captchaId);
+  if (!challenge && !isLocalFallback) {
+    res.status(400).json({
+      error: 'Verification code expired or not found. Please click Refresh to get a new code.',
+      field: 'captcha',
+      needsRefresh: true
+    });
+    return;
+  }
+
+  if (challenge) {
+    if (Date.now() > challenge.expiresAt) {
+      captchaStore.delete(captchaId);
+      res.status(400).json({
+        error: 'Verification code expired. Please refresh the code and try again.',
+        field: 'captcha',
+        needsRefresh: true
+      });
+      return;
+    }
+
+    // Check code case-insensitively
+    if (challenge.code.replace(/[^A-Za-z0-9]/g, '').toUpperCase() !== inputCaptchaCode) {
+      // Invalidate challenge upon failed attempt to prevent brute force
+      captchaStore.delete(captchaId);
+      res.status(400).json({
+        error: 'Human verification failed. The characters entered did not match. Please try again with the new code.',
+        field: 'captcha',
+        needsRefresh: true
+      });
+      return;
+    }
+
+    // Once captcha is verified, consume it
+    captchaStore.delete(captchaId);
+  }
+
+  // Validate Demo Credentials (id: admin, password: 1234)
+  if (inputId !== DEMO_USER.id || inputPassword !== DEMO_USER.password) {
+    res.status(401).json({
+      error: 'Invalid credentials. Please use Demo ID: "admin" and Demo Password: "1234".',
+      field: 'credentials'
+    });
+    return;
+  }
+
+  // Generate secure session token
+  const token = `mirchi_${crypto.randomBytes(24).toString('hex')}`;
+  const now = Date.now();
+  const expiresAt = now + 7 * 24 * 3600 * 1000; // 7 days
+
+  const sessionUser: UserSession = {
+    token,
+    id: DEMO_USER.id,
+    username: DEMO_USER.id,
+    name: DEMO_USER.name,
+    role: DEMO_USER.role,
+    avatar: DEMO_USER.avatar,
+    title: DEMO_USER.title,
+    loginTime: now,
+    expiresAt
+  };
+
+  sessionStore.set(token, sessionUser);
+
+  res.json({
+    success: true,
+    message: 'Login successful! Welcome, Administrator.',
+    token,
+    user: {
+      id: sessionUser.id,
+      username: sessionUser.username,
+      name: sessionUser.name,
+      role: sessionUser.role,
+      avatar: sessionUser.avatar,
+      title: sessionUser.title,
+      loginTime: sessionUser.loginTime,
+      expiresAt: sessionUser.expiresAt
+    }
+  });
+});
+
+// 3. Get Current Authenticated User Session
+app.get('/api/auth/me', (req: Request, res: Response) => {
+  const authHeader = req.headers.authorization || (req.headers['x-auth-token'] as string);
+  const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7).trim() : authHeader?.trim();
+
+  if (!token || !sessionStore.has(token)) {
+    res.json({ authenticated: false, user: null });
+    return;
+  }
+
+  const session = sessionStore.get(token)!;
+  if (Date.now() > session.expiresAt) {
+    sessionStore.delete(token);
+    res.json({ authenticated: false, user: null });
+    return;
+  }
+
+  res.json({
+    authenticated: true,
+    user: {
+      id: session.id,
+      username: session.username,
+      name: session.name,
+      role: session.role,
+      avatar: session.avatar,
+      title: session.title,
+      loginTime: session.loginTime
+    }
+  });
+});
+
+// 4. Logout Endpoint
+app.post('/api/auth/logout', (req: Request, res: Response) => {
+  const authHeader = req.headers.authorization || (req.headers['x-auth-token'] as string);
+  const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7).trim() : authHeader?.trim();
+
+  if (token && sessionStore.has(token)) {
+    sessionStore.delete(token);
+  }
+
+  res.json({ success: true, message: 'Logged out successfully.' });
+});
 
 // --- Health Check ---
 app.get('/api/health', (req: Request, res: Response) => {
