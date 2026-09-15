@@ -6,10 +6,147 @@ const DB_PATH = path.resolve(process.cwd(), 'launchpad.db');
 
 let dbInstance: DatabaseSync | null = null;
 
+function initSchema(db: DatabaseSync): void {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS events (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      organizer TEXT NOT NULL,
+      city TEXT NOT NULL,
+      mode TEXT NOT NULL,
+      start_date TEXT NOT NULL,
+      end_date TEXT NOT NULL,
+      tags TEXT NOT NULL,
+      note TEXT,
+      url TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS resources (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      category TEXT NOT NULL,
+      type TEXT NOT NULL,
+      icon TEXT NOT NULL,
+      title TEXT NOT NULL,
+      description TEXT NOT NULL,
+      url TEXT NOT NULL,
+      likes INTEGER DEFAULT 0
+    );
+    CREATE TABLE IF NOT EXISTS degrees (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      full_title TEXT NOT NULL,
+      description TEXT NOT NULL,
+      icon TEXT NOT NULL,
+      duration_years INTEGER DEFAULT 4,
+      semesters_count INTEGER DEFAULT 8
+    );
+    CREATE TABLE IF NOT EXISTS roadmap_semesters (
+      id TEXT PRIMARY KEY,
+      degree_id TEXT NOT NULL,
+      year INTEGER NOT NULL,
+      semester_number INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      focus_areas TEXT NOT NULL,
+      academic_core TEXT NOT NULL,
+      industry_prep TEXT NOT NULL,
+      milestone TEXT NOT NULL,
+      FOREIGN KEY (degree_id) REFERENCES degrees(id)
+    );
+    CREATE TABLE IF NOT EXISTS roadmap_tasks (
+      id TEXT PRIMARY KEY,
+      semester_id TEXT NOT NULL,
+      task_order INTEGER NOT NULL,
+      task_text TEXT NOT NULL,
+      category TEXT NOT NULL,
+      FOREIGN KEY (semester_id) REFERENCES roadmap_semesters(id)
+    );
+    CREATE TABLE IF NOT EXISTS user_progress (
+      task_id TEXT PRIMARY KEY,
+      completed BOOLEAN NOT NULL DEFAULT 0,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS saved_events (
+      event_id TEXT PRIMARY KEY,
+      saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (event_id) REFERENCES events(id)
+    );
+    CREATE TABLE IF NOT EXISTS user_preferences (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS squad_posts (
+      id TEXT PRIMARY KEY,
+      hackathon_id TEXT,
+      hackathon_name TEXT NOT NULL,
+      project_title TEXT NOT NULL,
+      leader_name TEXT NOT NULL,
+      leader_college TEXT NOT NULL,
+      roles_needed TEXT NOT NULL,
+      current_members INTEGER DEFAULT 1,
+      team_size INTEGER DEFAULT 4,
+      tech_stack TEXT NOT NULL,
+      description TEXT NOT NULL,
+      contact_type TEXT NOT NULL,
+      contact_value TEXT NOT NULL,
+      status TEXT DEFAULT 'Open',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS opportunities (
+      id TEXT PRIMARY KEY,
+      company TEXT NOT NULL,
+      role_title TEXT NOT NULL,
+      opportunity_type TEXT NOT NULL,
+      eligible_batches TEXT NOT NULL,
+      role_category TEXT NOT NULL,
+      location TEXT NOT NULL,
+      stipend_or_ctc TEXT NOT NULL,
+      apply_url TEXT NOT NULL,
+      deadline TEXT,
+      description TEXT NOT NULL,
+      skills TEXT NOT NULL,
+      selection_process TEXT,
+      status TEXT DEFAULT 'Active',
+      featured BOOLEAN DEFAULT 0,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS saved_opportunities (
+      opportunity_id TEXT PRIMARY KEY,
+      saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (opportunity_id) REFERENCES opportunities(id)
+    );
+    CREATE TABLE IF NOT EXISTS projects (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      tagline TEXT NOT NULL,
+      level TEXT NOT NULL,
+      domain TEXT NOT NULL,
+      problem_statement TEXT NOT NULL,
+      target_audience TEXT NOT NULL,
+      tech_stack TEXT NOT NULL,
+      architecture_diagram TEXT NOT NULL,
+      components TEXT NOT NULL,
+      data_flow TEXT NOT NULL,
+      database_schema TEXT NOT NULL,
+      interview_qa TEXT NOT NULL,
+      milestones TEXT NOT NULL,
+      github_starter_url TEXT,
+      stars INTEGER DEFAULT 0,
+      featured BOOLEAN DEFAULT 0,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS saved_projects (
+      project_id TEXT PRIMARY KEY,
+      saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (project_id) REFERENCES projects(id)
+    );
+  `);
+}
+
 export function getDb(): DatabaseSync {
   if (!dbInstance) {
     dbInstance = new DatabaseSync(DB_PATH);
     dbInstance.exec('PRAGMA foreign_keys = ON;');
+    initSchema(dbInstance);
   }
   return dbInstance;
 }
@@ -662,7 +799,7 @@ export function getDegreeRoadmap(degreeId = 'btech_cse', semesterNum?: string | 
     const semTasks: any[] = [];
     for (const t of allTasks) {
       if (t.semester_id === sRow.id) {
-        semTasks.append ? null : semTasks.push({
+        semTasks.push({
           id: t.id,
           order: t.task_order,
           text: t.task_text,

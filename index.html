@@ -183,34 +183,56 @@
     }
 
     .topbar {
-      min-height: 78px;
+      min-height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 16px;
+      position: sticky;
+      top: 12px;
+      z-index: 120;
+      padding: 8px 14px 8px 12px;
+      margin: 12px 0 24px 0;
+      border-radius: 999px;
+      background: rgba(255, 253, 247, 0.72);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(24, 33, 41, 0.08);
+      box-shadow:
+        0 12px 36px -4px rgba(24, 33, 41, 0.08),
+        0 2px 8px -1px rgba(24, 33, 41, 0.03),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -1px 1px 0 rgba(24, 33, 41, 0.03);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       font-family: var(--mono);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       letter-spacing: -0.02em;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
 
     .brand-mark {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      border-radius: 14px;
+      border-radius: 13px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(255, 46, 46, 0.45);
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 4px 18px rgba(255, 46, 46, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
     }
 
@@ -235,26 +257,57 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
-      color: var(--ink-soft);
-      font-size: 13px;
-      font-weight: 600;
+      gap: 2px;
+      padding: 3px 4px;
+      border-radius: 999px;
+      background: rgba(24, 33, 41, 0.035);
+      border: 1px solid rgba(24, 33, 41, 0.04);
+      box-shadow: inset 0 1px 2px rgba(24, 33, 41, 0.04), 0 1px 0 rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .nav-links a {
-      transition: color 180ms ease;
+      padding: 7px 13px;
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
 
     .nav-links a:hover {
-      color: var(--coral);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0.5px rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    @media (max-width: 1240px) and (min-width: 901px) {
+      .nav-links {
+        gap: 1px;
+        padding: 2px 3px;
+      }
+      .nav-links a {
+        padding: 6px 9px;
+        font-size: 12px;
+      }
     }
 
     .nav-cta-btn {
       min-height: 38px;
       padding: 0 16px;
-      border: 1.5px solid var(--ink);
+      border: 1px solid rgba(24, 33, 41, 0.1);
       border-radius: 999px;
-      background: var(--acid);
+      background: rgba(215, 243, 107, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       color: var(--ink);
       font-family: var(--mono);
       font-size: 11px;
@@ -262,12 +315,19 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: transform 180ms ease, box-shadow 180ms ease;
+      box-shadow:
+        0 2px 10px rgba(215, 243, 107, 0.4),
+        inset 0 1px 0.5px rgba(255, 255, 255, 0.8);
+      transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
     }
 
     .nav-cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 2px 3px 0 var(--ink);
+      transform: translateY(-1px);
+      background: rgba(215, 243, 107, 0.98);
+      box-shadow:
+        0 5px 18px rgba(215, 243, 107, 0.55),
+        inset 0 1px 0.5px rgba(255, 255, 255, 0.95);
     }
 
     .mobile-menu {
@@ -1912,30 +1972,36 @@
       }
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 960px) {
       .site-shell {
-        width: min(100% - 22px, 600px);
+        width: min(100% - 22px, 860px);
       }
 
       .topbar {
-        min-height: 68px;
+        min-height: 58px;
+        border-radius: 20px;
+        padding: 6px 12px;
       }
 
       .nav-links {
         position: absolute;
-        top: 59px;
-        right: 11px;
-        left: 11px;
-        z-index: 10;
+        top: calc(100% + 10px);
+        right: 0;
+        left: 0;
+        z-index: 150;
         display: none;
         flex-direction: column;
         align-items: stretch;
-        gap: 0;
+        gap: 3px;
         padding: 10px;
-        border: 1.5px solid var(--ink);
-        border-radius: 15px;
-        background: var(--white);
-        box-shadow: 5px 6px 0 var(--ink);
+        border-radius: 22px;
+        background: rgba(255, 253, 247, 0.92);
+        backdrop-filter: blur(28px) saturate(190%);
+        -webkit-backdrop-filter: blur(28px) saturate(190%);
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        box-shadow:
+          0 20px 50px rgba(24, 33, 41, 0.14),
+          inset 0 1px 0 rgba(255, 255, 255, 0.95);
       }
 
       .nav-links.open {
@@ -1943,8 +2009,10 @@
       }
 
       .nav-links a {
-        padding: 12px 9px;
-        border-bottom: 1px solid var(--line);
+        padding: 11px 14px;
+        border-radius: 12px;
+        border-bottom: none;
+        font-size: 14px;
       }
 
       .nav-cta-btn {
@@ -1957,12 +2025,20 @@
         justify-content: center;
         width: 38px;
         height: 38px;
-        border: 1.5px solid var(--ink);
-        border-radius: 10px;
-        background: var(--acid);
+        border: 1px solid rgba(24, 33, 41, 0.1);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         color: var(--ink);
         font-family: var(--mono);
         font-size: 18px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        transition: transform 180ms ease, background 180ms ease;
+      }
+
+      .mobile-menu:hover {
+        background: rgba(255, 255, 255, 0.9);
       }
 
       .hero {
@@ -2045,19 +2121,19 @@
     }
 
     .nav-links a.active {
-      color: var(--coral) !important;
+      color: var(--ink) !important;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.94) !important;
+      box-shadow:
+        0 2px 10px rgba(24, 33, 41, 0.08),
+        0 1px 3px rgba(24, 33, 41, 0.04),
+        inset 0 1px 0.5px #ffffff !important;
+      border: 1px solid rgba(24, 33, 41, 0.04);
       position: relative;
     }
 
     .nav-links a.active::after {
-      content: "";
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--coral);
-      border-radius: 2px;
+      display: none;
     }
 
     .standalone-page-main {
@@ -2609,17 +2685,21 @@
     }
 
     .badge-new {
-      display: inline-block;
-      padding: 2px 6px;
-      font-size: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5px 5.5px;
+      font-size: 8.5px;
       font-family: var(--mono);
       font-weight: 700;
       color: #fff;
-      background: linear-gradient(135deg, #ff4500, #ff1a1a);
+      background: linear-gradient(135deg, #ff453a, #ff2d55);
       border-radius: 999px;
-      margin-left: 4px;
-      vertical-align: middle;
-      letter-spacing: 0.5px;
+      margin-left: 5px;
+      vertical-align: 1px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 2px 6px rgba(255, 45, 85, 0.35), inset 0 1px 0.5px rgba(255, 255, 255, 0.5);
+      line-height: 1.1;
     }
 
     .squad-section-badge {
